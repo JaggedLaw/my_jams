@@ -1,0 +1,13 @@
+<h1>Good Jams</h1>
+
+<% flash.each do |type, msg| %>
+  <%= content_tag :div, msg, class: "flash_#{type}" %>
+<% end %>
+
+<% @songs.each do |song| %>
+  <li><%= link_to song.title, song_path(song) %> <%= link_to "Edit", edit_song_path(song) %>
+  <%= link_to "Delete", song_path(song), method: :delete %>
+  </li>
+  <% end %>
+  <br>
+<p><%= link_to "New Song", new_song_path %></p>
