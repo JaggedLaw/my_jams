@@ -3,15 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user
+  helper_method :current_user, :most_recent_song
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def most_recent_song
-    @most_recent_song = Song.find(most_recent_song_id)
-    p most_recent_song_id
-    binding.pry
+    @most_recent_song = Song.find(session[:most_recent_song_id]) if session[:most_recent_song_id]
   end
 end

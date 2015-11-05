@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      flash[:errors] = "Unsuccessful. Try again"
+      flash.now[:errors] = @user.errors.full_messages.join(", ")
       render :new
     end
   end

@@ -2,7 +2,9 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update]    # set the song for these actions
 
   def index
+    #pass songs where song id associated with current_user
     @songs = Song.all
+    #pass categories available in something like a drop down with some form_for select (drop down)
   end
 
   def show
@@ -13,9 +15,12 @@ class SongsController < ApplicationController
   end
 
   def create
+
     @song = Song.new(song_params)      # grabbing from the private method
     if @song.save                      # if the validations went through okay
+      #associate song with user here
       flash[:notice] = "Song successfully added!"
+      session[:most_recent_song_id] = @song[:id]
       redirect_to songs_path
     else
       flash[:errors] = "Do it right!"

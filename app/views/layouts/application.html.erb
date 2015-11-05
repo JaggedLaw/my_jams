@@ -14,6 +14,12 @@
     <%= link_to "Login", login_path %>
   <% end %>
 
+  <% if most_recent_song %>
+    <p>
+      <strong>Newest song:</strong> <%= most_recent_song.title %>
+    </p>
+  <% end %>
+
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash_#{name}" %>
   <% end %>
